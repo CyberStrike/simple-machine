@@ -1,7 +1,5 @@
 <template>
-  <div>
-    <component :is="actionCardComponent" v-on="eventHandler"/>
-  </div>
+  <component :is="actionCardComponent" v-on="eventHandler"/>
 </template>
 
 <script>
@@ -12,15 +10,22 @@
   import ActionCardError      from './ActionCardError'
   import ActionCardSuccess    from './ActionCardSuccess'
 
+  const STATES = {
+    initial: 'initial',
+    loading: 'loading',
+    success: 'success',
+    error: 'error'
+  }
+
   export default {
     name: 'ActionCard',
-    components: { ActionCardSuccess, ActionCardError, ActionCardLoading, ActionCardInitial, Card },
     data: () => ({
-      showComponent: 'Initial',
+      state: 'initial'
     }),
+    components: { ActionCardSuccess, ActionCardError, ActionCardLoading, ActionCardInitial, Card },
     computed: {
       actionCardComponent () {
-        return 'ActionCard' + this.showComponent
+        return 'action-card-' + this.state
       },
       eventHandler () {
         // V-ON Expects an Object
@@ -28,7 +33,7 @@
         return {
           'fix-thing': vm.fixThing,
           reset () {
-            vm.showComponent = 'Initial'
+            vm.state = STATES.initial
           }
         }
       }
@@ -36,12 +41,11 @@
     methods: {
       async fixThing () {
         try {
-          this.showComponent = 'Loading'
+          this.state = STATES.loading
           await fixThingEndpoint()
-          this.showComponent = 'Success'
+          this.state = STATES.success
         } catch (e) {
-          this.showComponent = 'Error'
-          console.log(e)
+          this.state = STATES.error
         }
       }
     }
