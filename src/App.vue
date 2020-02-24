@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <main/>
+    <main-view/>
   </div>
 </template>
 
@@ -16,6 +16,9 @@ export default {
 </script>
 
 <style>
+  html, body {
+    background: rgb(8, 10, 12);
+  }
 #app {
   margin-top: 60px;
 }

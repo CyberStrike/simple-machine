@@ -1,14 +1,24 @@
 <template>
-  <div id="Main">
-    <card/>
+  <div id="Main bg-dark">
+    <div class="container">
+      <div class="col col-md-6 mx-auto">
+        <div class="my-2">
+          <action-card/>
+        </div>
+        <div class="my-2">
+          <action-card-simple/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import Card from "./Card";
+import ActionCard from './ActionCard'
+import ActionCardSimple from './ActionCardSimple'
 
 export default {
   name: "Main",
-  components: { Card }
+  components: { ActionCard, ActionCardSimple }
 };
 </script>
